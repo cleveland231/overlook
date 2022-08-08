@@ -7,9 +7,9 @@ import { fetchAll } from './api-calls';
 
 // import callCustomers from './api-calls.js'
 
-// const getRandomCustomer = () => {
-//     return Math.floor(Math.random() * 9) + 1;
-// };
+const getRandomCustomer = () => {
+    return Math.floor(Math.random() * theCustomers.length);
+};
 
 
 // QUERY SELECTORS
@@ -29,9 +29,13 @@ const bookingMessage = document.querySelector('.booking-message')
 
 
 // GLOBAL VARIABLES
-let theCustomers
-let theBookings
-let theRooms
+let customerClass;
+let currentBooking;
+let currentRoom;
+let currentCustomer;
+let theCustomers;
+let theBookings;
+let theRooms;
 const getFetch = () => {
     fetchAll()
     .then(data => {
@@ -39,6 +43,11 @@ const getFetch = () => {
         theCustomers = data[0].customers
         theBookings = data[1].bookings
         theRooms = data[2].rooms
+        currentCustomer = new Customer(theCustomers[getRandomCustomer()])
+        // currentBooking = new Booking(theBookings[])
+        currentRoom = new Room(theRooms)
+        welcomeCustomer()
+        // renderBookingCardsOnPage()
     })
 };
 
@@ -49,28 +58,60 @@ const getFetch = () => {
 
 window.addEventListener('load', function() {
     getFetch()
-    welcomeCustomer(theCustomers)
-    // renderBookingsOnPage()
+    // welcomeCustomer()
 })
 
 
 // FUNCTIONS
-function welcomeCustomer(theCustomers) {
-    console.log('customers:', theCustomers)
-    welcomeCustomerSpot.innerHTML = `Welcomes ${theCustomers.name}!`
+function welcomeCustomer() {
+    welcomeCustomerSpot.innerHTML = `${currentCustomer.name}!`
 };
 
 // function renderBookingCardsOnPage() {
+//     customerClass = new Customer(customerData)
+//     const allBookings = customerClass.viewPastAndUpcomingBookings()
+//     bookingCard.innerHTML = ''
+//     allBookings.forEach((booking) => {
 //     bookingCard.innerHTML = 
-//     `<li> NUMBER </li>
-//     <li> TYPE </li>
-//     <li> BIDET </li>
-//     <li> BED SIZE </li>
-//     <li> NUMBER OF BEDS </li>
-//     <li> COST PER NIGHT </li>`
-
+//     `<li> ROOM NUMBER: ${currentRoom.number} </li>
+//     <li> TYPE: ${currentRoom.roomType} </li>
+//     <li> BIDET: ${currentRoom.bidet} </li>
+//     <li> BED SIZE: ${currentRoom.bedSize} </li>
+//     <li> NUMBER OF BEDS: ${currentRoom.numBeds} </li>
+//     <li> COST PER NIGHT: ${currentRoom.costPerNight} </li>`
+//     })
 //     hide(bookingsSpot)
 //     show(bookingCard)
+// }
+
+
+
+// {
+//     number: 1,
+//     roomType: "residential suite",
+//     bidet: true,
+//     bedSize: "queen",
+//     numBeds: 1,
+//     costPerNight: 358.4
+//     },
+
+// function showAllRecipes() {
+//     recipeRepo = new RecipeRepository(recipes, ingredients)
+//     const allRecipes = recipeRepo.createAllRecipes(thisIngredient)
+//     recipeCardWrapper.innerHTML = '';
+//     allRecipes.forEach((recipe) => {
+//         recipeCardWrapper.innerHTML += `
+//         <div class="recipe-card">
+//         <button class="view-recipe-button" id=${recipe.id} data-recipeId=${recipe.id}> <h2 data-recipeId=${recipe.id}> ${recipe.name} </h2> 
+//       <img class='card-image' src=${recipe.image} data-recipeId=${recipe.id} alt=${recipe.name}>
+//       </button>
+//       </div>`
+//     })
+//     hide(ingredientCardWrapper)
+//     hide(pantryButton)
+//     show(recipeCardWrapper)
+//     addRecipeEventListeners()
+//     cookbookIsActive = false;
 // }
 
 // function renderBookingLinesOnPage() {
@@ -91,17 +132,18 @@ function hide(element) {
     element.classList.add('hidden')
 };
 
-const setCustomerData = (customerData) => {
-    return new Customer(customerData)
-};
+// const setCustomerData = (customerData) => {
+//     console.log('cd', customerData)
+//     return new Customer(customerData)
+// };
 
-const setRoomData = (roomData) => {
-    return new Room(roomData)
-};
+// const setRoomData = (roomData) => {
+//     return new Room(roomData)
+// };
 
-const setBookingData = (bookingData) => {
-    return new Booking(bookingData)
-};
+// const setBookingData = (bookingData) => {
+//     return new Booking(bookingData)
+// };
 
 
 

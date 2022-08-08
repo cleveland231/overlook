@@ -12,44 +12,54 @@ import Room from '../src/classes/Room'
 describe('Customer test',() => {
 
     let customer;
-    let booking;
+    let bookings = [];
     let room;
+    
 
     beforeEach(() => {
-        customer = new Customer(sampleCustomerData[0]);
-        booking = new Booking(sampleBookingData[0]);
-        room = new Room(sampleRoomData[0])
+        sampleBookingData.forEach((booking) => {
+            bookings.push(new Booking(booking))
+        })
+        customer = new Customer(sampleCustomerData[0], bookings);
+        customer.viewPastAndUpcomingBookings()
+        room = new Room(sampleRoomData[0]);
     });
 
-    it('Should be an instance of Room', () => {
-
-        expect(room).to.be.an.instanceOf(Room)
-    })
+    it('Should be an instance of Customer', () => {
+        expect(customer).to.be.an.instanceOf(Customer)
+    });
 
     it('Should be a function', () => {
-
         expect(Customer).to.be.a('function');
-    })
+    });
 
     it('Should be able to have an id', () => {
-
         expect(customer.id).to.equal(1)
-    })
+    });
 
     it('Should be able to have a name', () => {
-
         expect(customer.name).to.equal("Leatha Ullrich")
-    })
+    });
 
     it('Should be able to view past and upcoming bookings', () => {
-        console.log("45before booking", booking)
-        viewPastAndUpcomingBookings(booking)
-        console.log("47after booking", booking)
-        expect(customer.viewPastAndUpcomingBookings(booking)).to.equal()
+        expect(customer.bookings.length).to.equal(1)
+    });
+
+    // it('Should be able to view past and upcoming bookings', () => {
+    //     console.log("45", booking)
+    //     viewPastAndUpcomingBookings(booking)
+    //     console.log("47", booking)
+    //     expect(customer.viewPastAndUpcomingBookings(booking)).to.equal()
+    // })
+
+    it.only('Should be able to return the total amount spent', () => {
+        customer.returnTotalSpent(sampleRoomData)
+        customer.totalSpent = customer.totalSpent.toFixed(2)
+        expect(customer.totalSpent).to.equal('2963.75')
     })
 
-    it('Should be able to select a date to book', () => {
+    // it('Should be able to select a date to book', () => {
         
-        expect(customer.selectDateToBook).to.equal()
-    })
+    //     expect(customer.selectDateToBook).to.equal()
+    // })
 })

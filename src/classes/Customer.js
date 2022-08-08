@@ -1,22 +1,43 @@
-export default class Customer {
-    constructor(customer) {
-        this.id = customer.id
-        this.name = customer.name
-        this.bookings = []
-        this.totalSpent = 0
-    }
-    viewPastAndUpcomingBookings(booking) {
-        console.log("9before booking", booking)
-        this.bookings = booking.filter((singleBooking) => {
-            singleBooking.id === this.id
-        })
-        console.log("13after booking", booking)
-    }
-    returnTotalSpent() {
-        // this.totalSpent = 
-    }
-    selectDateToBook() {
 
+export default class Customer {
+    constructor(customerData, bookings) {
+        this.id = customerData.id;
+        this.name = customerData.name;
+        this.bookings = bookings;
+        this.totalSpent = 0;
+        this.availableRooms = []
+    }
+    viewPastAndUpcomingBookings() {
+        const userBookings = this.bookings.filter((singleBooking) => {
+            return singleBooking.userID === this.id
+        })
+        return userBookings
+    }
+    returnTotalSpent(roomData) {
+        this.bookings.forEach((booking) => {
+            roomData.forEach((room) => {
+                if (booking.roomNumber === room.number) {
+                    this.totalSpent += room.costPerNight
+                }
+            })
+        })
+    }
+    selectDateToBook(date) {
+
+        /*
+        get all data arrays to come on in
+        match the booking.roomNumber and room.number?
+        potential: forEach, find?
+        show list of rooms that are available on that    date.
+        */
+    }
+    filterRoomTypes(date, ) {
+
+        /*
+        call this.selectDateToBook(date)
+        be able to filter through room data for .roomType
+        potential: forEach, filter 
+        */
     }
 }
 
