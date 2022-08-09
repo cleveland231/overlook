@@ -42,7 +42,7 @@ describe('Customer test',() => {
     });
 
     it('Should be able to view past and upcoming bookings', () => {
-        expect(customer.bookings.length).to.equal(1)
+        expect(customer.bookings.length).to.equal(5040)
     });
 
     // it('Should be able to view past and upcoming bookings', () => {
@@ -52,10 +52,10 @@ describe('Customer test',() => {
     //     expect(customer.viewPastAndUpcomingBookings(booking)).to.equal()
     // })
 
-    it.only('Should be able to return the total amount spent', () => {
+    it('Should be able to return the total amount spent', () => {
         customer.returnTotalSpent(sampleRoomData)
         customer.totalSpent = customer.totalSpent.toFixed(2)
-        expect(customer.totalSpent).to.equal('2963.75')
+        expect(customer.totalSpent).to.equal('2110582.92')
     })
 
     // it('Should be able to select a date to book', () => {

@@ -33,42 +33,47 @@
 
   <div class="page-wrapper">
     <div class="left-side">
-      <button class="view-bookings-button"> BOOKINGS </button>
+      <button class="book-a-room-button"> BOOK A ROOM </button>
+      <button class="your-bookings-button"> YOUR BOOKINGS </button>
     </div>
     <div class="dash-board">
       <div class="book-a-room-bar">
-          <div class="bookings-bar-spot"></div>
+          <!-- <div class="bookings-bar-spot"></div> -->
+        <div id="booking-a-room-section">
           <div class="calendar">
             <label for="start"> SELECT DATE: </label>
-            <input type="date" id="start" name="trip-start"
-                  value="2018-07-22"
-                  min="2018-01-01" max="2018-12-31">
+            <input class='calendar-value' type="date" id="start" name="trip-start"
+                  value="2022-01-24"
+                  min="2021-01-01" max="2024-01-01">
                   <input class="submit-calendar-button" type="submit" value="Submit" />
           </div>
           <form class="filter-drop-down" action="#">
             <label for="filter"> FILTER BOOKINGS: </label>
             <select name="filter" id="filtering">
-              <option class="filter-by-any" value="any"> ANY </option>
-              <option class="filter-by-single" value="single"> SINGLE </option>
-              <option class="filter-by-junior" value="junior"> JUNIOR </option>
-              <option class="filter-by-suite" value="suite"> SUITE </option>
+              <option class="roomType" value="any"> ANY </option>
+              <option class="roomType" value="single"> SINGLE </option>
+              <option class="roomType" value="junior"> JUNIOR </option>
+              <option class="roomType" value="suite"> SUITE </option>
+              <option class="roomType" value="suite"> RESIDENTIAL </option>
+              <input class="submit-filter-button" type="submit" value="Submit" />
             </select>
-            <input class="submit-filter-button" type="submit" value="Submit" />
           </form>
-          <h1 class="booking-message hidden"> YOUR BOOKINGS </h1>
-          <p class="spent-spot"> TOTAL SPENT </p>
+        </div>
+
+        
       </div>
+      <h1 class="booking-message"> YOUR BOOKINGS </h1>
       <div class="book-a-room-section">
         <div class="bookings-spot"></div>
-        <div class="booking-card">
+        <!-- <div class="booking-card">
           <li> NUMBER </li>
           <li> TYPE </li>
           <li> BIDET </li>
           <li> BED SIZE </li>
           <li> NUMBER OF BEDS </li>
-          <li> COST PER NIGHT </li>
+          <li> COST </li>
           <button class="book-room"> BOOK ROOM </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
