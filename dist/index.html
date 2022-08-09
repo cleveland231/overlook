@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="top">
-    <h1> OVERLOOK MOTEL WELCOMES: </h1> 
+    <h1> OVERLOOK MOTEL </h1> 
     <h1 class="welcome-customer"></h1>
     <p class="amount-spent"></p>
     <button class="sign-out"> SIGN OUT </button>
@@ -37,9 +37,8 @@
       <button class="your-bookings-button"> YOUR BOOKINGS </button>
     </div>
     <div class="dash-board">
-      <div class="book-a-room-bar">
-          <!-- <div class="bookings-bar-spot"></div> -->
-        <div id="booking-a-room-section">
+      <div class="book-a-room-bar hidden">
+
           <div class="calendar">
             <label for="start"> SELECT DATE: </label>
             <input class='calendar-value' type="date" id="start" name="trip-start"
@@ -47,22 +46,21 @@
                   min="2021-01-01" max="2024-01-01">
                   <input class="submit-calendar-button" type="submit" value="Submit" />
           </div>
+
           <form class="filter-drop-down" action="#">
             <label for="filter"> FILTER BOOKINGS: </label>
             <select name="filter" id="filtering">
-              <option class="roomType" value="any"> ANY </option>
-              <option class="roomType" value="single"> SINGLE </option>
-              <option class="roomType" value="junior"> JUNIOR </option>
-              <option class="roomType" value="suite"> SUITE </option>
-              <option class="roomType" value="suite"> RESIDENTIAL </option>
+              <option class="room-type" value="single room"> SINGLE </option>
+              <option class="room-type" value="junior suite"> JUNIOR </option>
+              <option class="room-type" value="suite"> SUITE </option>
+              <option class="room-type" value="residential suite"> RESIDENTIAL </option>
               <input class="submit-filter-button" type="submit" value="Submit" />
             </select>
           </form>
-        </div>
-
         
       </div>
-      <h1 class="booking-message"> YOUR BOOKINGS </h1>
+
+      <div class="booking-message"> YOUR BOOKINGS </div>
       <div class="book-a-room-section">
         <div class="bookings-spot"></div>
         <!-- <div class="booking-card">

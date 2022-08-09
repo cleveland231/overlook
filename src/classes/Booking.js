@@ -1,7 +1,5 @@
-
 export default class Booking {
     constructor(bookingData) {
-        // console.log('4bookingdata', bookingData)
         this.id = bookingData.id
         this.userID = bookingData.userID
         this.date = bookingData.date
