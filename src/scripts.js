@@ -13,13 +13,13 @@ const getRandomCustomer = () => {
 // QUERY SELECTORS
 const bookARoomButton = document.querySelector('.book-a-room-button')
 const signOutButton = document.querySelector('.sign-out')
-let bookRoomButton = document.querySelector('.book-room')
+let bookRoomButtons = document.querySelector('.book-room')
 const submitFilterButton = document.querySelector('.submit-filter-button')
 const calendarSubmitButton = document.querySelector('.submit-calendar-button')
 const calendarValue = document.querySelector('.calendar-value')
 const welcomeCustomerSpot = document.querySelector('.welcome-customer')
 const bookingsSpot = document.querySelector('.bookings-spot')
-const bookingCard = document.querySelector('.booking-card')
+let bookingCard = document.querySelector('.booking-card')
 const filterDropDown = document.querySelector('.filter-drop-down')
 const bookingMessage = document.querySelector('.booking-message')
 const bookARoomSection = document.querySelector('.book-a-room-section')
@@ -74,9 +74,6 @@ window.addEventListener('load', function() {
     getFetch()
     hide(bookARoomBar)
     hide(yourBookingsButton)
-    // renderBookingLinesOnPage()
-    // hide(bookARoomBar)
-    // hide(yourBookingsButton)
 })
 
 
@@ -92,8 +89,10 @@ function showAvailableBookingsFromCalendar() {
     bookARoomSection.innerHTML = ''
     let formattedDate = calendarValue.value.split('-').join('/')
     let theAvailableRooms = hotel.selectDateToBook(formattedDate)
-
-    theAvailableRooms.forEach((room) => {
+    if (!theAvailableRooms.length) {
+        bookingMessage.innerHTML = `<div> NO ROOMS AVAILABLE, PLEASE SEARCH AGAIN </div>`
+    } else {
+    theAvailableRooms.forEach((room, index) => {
         bookARoomSection.innerHTML += 
     `<div class="booking-card">
     <li> ROOM NUMBER: ${room.number} </li>
@@ -102,29 +101,30 @@ function showAvailableBookingsFromCalendar() {
     <li> BED SIZE: ${room.bedSize} </li>
     <li> NUMBER OF BEDS: ${room.numBeds} </li>
     <li> COST: ${room.costPerNight} </li>
-    <button class="book-room"> BOOK ROOM </button>
+    <button id=${index} class="book-room"> BOOK ROOM </button>
     </div>`
     })
-    // checkIfRoomsAreAvailableCop()
-    // bookRoomButton = document.querySelector('.book-room')
-    // bookRoomButton.addEventListener('click', postApiHelper)
+    bookRoomButtons = document.querySelectorAll('.book-room')
+    bookRoomButtons.forEach(bookRoomButton => {
+    bookRoomButton.addEventListener('click', function(event) {
+    let room = theAvailableRooms[parseInt(event.target.id)]
+        postApiHelper(room, formattedDate)})
+        })
+    }
     show(bookingMessage)
 }
 
 function showRoomTypesFromFilter(event) {
-    console.log('hello')
     event.preventDefault()
-    bookingMessage.innerText = `FILTERED RESULTS`
+    bookingMessage.innerText = `FILTERED BY TYPE`
     bookARoomSection.innerHTML = ''
     let formattedDate = calendarValue.value.split('-').join('/')
     let dropDownValue = selectDropDown.value
-    console.log('dropDownValue: ', dropDownValue)
     let theFilteredRoomTypes = hotel.filterRoomTypes(formattedDate, dropDownValue)
-    console.log('thefrt:', theFilteredRoomTypes)
     if (!theFilteredRoomTypes.length) {
-        bookARoomSection.innerHTML = `<div> NO ROOMS AVAILABLE, PLEASE SEARCH AGAIN </div>`
+        bookingMessage.innerHTML = `<div> NO ROOMS AVAILABLE, PLEASE SEARCH AGAIN </div>`
     } else {
-    theFilteredRoomTypes.forEach((room) => {
+    theFilteredRoomTypes.forEach((room, index) => {
         bookARoomSection.innerHTML += 
     `<div class="booking-card">
     <li> ROOM NUMBER: ${room.number} </li>
@@ -133,18 +133,46 @@ function showRoomTypesFromFilter(event) {
     <li> BED SIZE: ${room.bedSize} </li>
     <li> NUMBER OF BEDS: ${room.numBeds} </li>
     <li> COST: ${room.costPerNight} </li>
-    <button class="book-room"> BOOK ROOM </button>
+    <button id=${index} class="book-room"> BOOK ROOM </button>
     </div>`
-    })
+})
+bookRoomButtons = document.querySelectorAll('.book-room')
+bookRoomButtons.forEach(bookRoomButton => {
+    bookRoomButton.addEventListener('click', function(event) {
+    let room = theFilteredRoomTypes[parseInt(event.target.id)]
+        postApiHelper(room, formattedDate)})
+        })
+    }
 }
-    // checkIfRoomsAreAvailableCop()
-    // bookRoomButton = document.querySelector('.book-room')
-    // bookRoomButton.addEventListener('click', postApiHelper)
+
+
+function postApiHelper(room, formattedDate) {
+    justBookedRoom = { userID: currentCustomer.id, date: formattedDate, roomNumber: room.number }
+    postApiData(justBookedRoom)
+}
+
+
+function postApiData(justBookedRoom) {
+    fetch('http://localhost:3001/api/v1/bookings', {
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(justBookedRoom)
+    }).then(data => data.json()).then(data => {
+        console.log(data)
+        hotel.bookings.push(data.newBooking)
+        currentCustomer.bookings.push(data.newBooking)
+        bookingMessage.innerText = `THANK YOU FOR BOOKING`
+        hide(bookARoomSection)
+        welcomeCustomer()
+        renderBookingLinesOnPage()
+
+
+    })
+    .catch(error => console.log(error));
 }
 
 
 function showBookingPage() {
-    console.log('hi from showbookingpage')
     show(bookARoomBar)
     show(bookARoomSection)
     show(yourBookingsButton)
@@ -155,10 +183,6 @@ function showBookingPage() {
 
 
 function showYourBookingPage() {
-    console.log('hello from showYourBookingPage')
-    // hide(yourBookingsButton)
-    // hide(bookARoomSection)
-    // show(bookARoomButton)
     hide(bookARoomSection)
     hide(bookARoomBar)
     hide(yourBookingsButton)
@@ -183,54 +207,35 @@ function renderBookingLinesOnPage() {
 }
 
 
+
+
+
+
+
+
 /*
 function logIn() {
 new view for hiding everything(page wrapper)
 have login page from user name and password (inputs)
 
-username - check id
+username - 
+get id from end of input
+
 potential: split
 
 password - 
+make sure password === overlook2021
 
-conditional if username and password are correct show page, hide login page
+conditional if username and password are correct 
+before show page, fetch the userid
+hide login page
 if wrong innerText = wrong password/username
 
-
-
+// modifiy getFetch to take in parameter for id
+// http://localhost:3001/api/v1/customers/<id> where<id> will be a number of a customer’s id
 
 }
 */
-
-
-// function postApiHelper(event) {
-//     event.preventDefault()
-//     let newIngredientName = inputIngredient.value;
-//     const findIngredient = ingredientsData.find(ingredient => ingredient.name === newIngredientName)
-//     let newAmount = parseInt(inputAmount.value)
-//     justBookedRoom = { userID: 48, date: 2019/09/23, roomNumber: 4 }
-//     postApiData(increasedPantry, newIngredientName)
-// }
-
-// function postApiData(increasedPantry, newIngredientName) {
-//     fetch('http://localhost:3001/api/v1/bookings', {
-//         method: 'POST', 
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(justBookedRoom)
-//     }).then(data => data.json()).then(data => {
-//         console.log(data)
-//         // pantry.addIngredients(increasedPantry, newIngredientName)
-//         // showAllRecipeDetails(parseInt(thisRecipeId))
-//     })
-//     .catch(error => console.log(error));
-// }
-
-// function checkIfRoomsAreAvailableCop() {
-//     if (there are no rooms available) {then  welcomeCustomerSpot.innerHTML = `SORRY NO ROOMS HERE< ADJUST YOUR SEARCH PLEASE`} else {
-//     welcomeCustomerSpot.innerHTML = `Hi ${currentCustomer.name}! You have spent: ${currentCustomer.totalSpent}`
-//     }
-// }
-
 
 function show(element) {
     element.classList.remove('hidden')
@@ -244,7 +249,35 @@ function hide(element) {
 
 
 
-
+// function showRoomTypesFromFilter(event) {
+//     console.log('hello')
+//     event.preventDefault()
+//     bookingMessage.innerText = `FILTERED BY TYPE`
+//     bookARoomSection.innerHTML = ''
+//     let formattedDate = calendarValue.value.split('-').join('/')
+//     let dropDownValue = selectDropDown.value
+//     console.log('dropDownValue: ', dropDownValue)
+//     let theFilteredRoomTypes = hotel.filterRoomTypes(formattedDate, dropDownValue)
+//     console.log('thefrt:', theFilteredRoomTypes)
+//     if (!theFilteredRoomTypes.length) {
+//         bookARoomSection.innerHTML = `<div> NO ROOMS AVAILABLE, PLEASE SEARCH AGAIN </div>`
+//     } else {
+//     theFilteredRoomTypes.forEach((room) => {
+//         bookARoomSection.innerHTML += 
+//     `<div class="booking-card">
+//     <li> ROOM NUMBER: ${room.number} </li>
+//     <li> TYPE: ${room.roomType} </li>
+//     <li> BIDET: ${room.bidet} </li>
+//     <li> BED SIZE: ${room.bedSize} </li>
+//     <li> NUMBER OF BEDS: ${room.numBeds} </li>
+//     <li> COST: ${room.costPerNight} </li>
+//     <button class="book-room"> BOOK ROOM </button>
+//     </div>`
+//     })
+//     }
+//     // bookRoomButton = document.querySelector('.book-room')
+//     // bookRoomButton.addEventListener('click', postApiHelper)
+// }
 
 
 

@@ -48,19 +48,19 @@ describe('Hotel test',() => {
         expect(hotel.rooms).to.equal(rooms)
     });
 
-    // it('Should be select date to book', () => {
-    //     // console.log('date: ', date)
-    //     hotel.selectDateToBook("2022/04/22")
-    //     // hotel.selectDateToBook(date)
-    //     expect(hotel.selectDateToBook("2022/04/22").length).to.be.a()
-    // });
+    it('Should be select date to book', () => {
+        // console.log('date: ', date)
+        hotel.selectDateToBook("2022/04/22")
+        // hotel.selectDateToBook(date)
+        expect(hotel.selectDateToBook("2022/04/22").length).to.be.a()
+    });
 
-    // it('Should be able to select room types', () => {
-    //     // console.log('date: ', date)
-    //     hotel.selectDateToBook("2022/04/22")
-    //     hotel.filterRoomTypes("2022/04/22", "residential suite")
-    //     // hotel.selectDateToBook(date)
-    //     expect(hotel.filterRoomTypes).to.be.a()
-    // });
+    it('Should be able to select room types', () => {
+        // console.log('date: ', date)
+        // hotel.selectDateToBook(date)
+        expect(hotel.filterRoomTypes("2022/04/22", "residential suite").length).to.equal(15)
+    });
+
+   
 
 })
