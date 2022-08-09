@@ -37,30 +37,30 @@ describe('Hotel test',() => {
     });
 
     it('Should be able to have customers', () => {
-        expect(hotel.customer).to.equal()
+        expect(hotel.customer).to.equal(sampleCustomerData[0])
     });
 
     it('Should be able to have bookings', () => {
-        expect(hotel.bookings).to.equal()
+        expect(hotel.bookings).to.equal(bookings)
     });
 
     it('Should be able to have rooms', () => {
-        expect(hotel.rooms).to.equal()
+        expect(hotel.rooms).to.equal(rooms)
     });
 
     // it('Should be select date to book', () => {
     //     // console.log('date: ', date)
     //     hotel.selectDateToBook("2022/04/22")
     //     // hotel.selectDateToBook(date)
-    //     expect(hotel.availableRooms.length).to.be.a()
+    //     expect(hotel.selectDateToBook("2022/04/22").length).to.be.a()
     // });
 
-    it('Should be able to select room types', () => {
-        // console.log('date: ', date)
-        hotel.selectDateToBook("2022/04/22")
-        hotel.filterRoomTypes("2022/04/22",)
-        // hotel.selectDateToBook(date)
-        expect(hotel.filterRoomTypes).to.be.a()
-    });
+    // it('Should be able to select room types', () => {
+    //     // console.log('date: ', date)
+    //     hotel.selectDateToBook("2022/04/22")
+    //     hotel.filterRoomTypes("2022/04/22", "residential suite")
+    //     // hotel.selectDateToBook(date)
+    //     expect(hotel.filterRoomTypes).to.be.a()
+    // });
 
 })

@@ -27,6 +27,7 @@ const yourBookingsButton = document.querySelector('.your-bookings-button')
 const bookingARoomSection = document.querySelector('#booking-a-room-section')
 const roomType = document.querySelector('.room-type')
 const bookARoomBar = document.querySelector('.book-a-room-bar')
+const selectDropDown = document.querySelector('.selectDropDown')
 
 
 // GLOBAL VARIABLES
@@ -57,6 +58,7 @@ const getFetch = () => {
         hotel = new Hotel(currentCustomer, allBookings, allRooms)
         welcomeCustomer()
         renderBookingLinesOnPage()
+        hide(bookARoomBar)
     })
 };
 
@@ -70,6 +72,8 @@ submitFilterButton.addEventListener('click', showRoomTypesFromFilter)
 
 window.addEventListener('load', function() {
     getFetch()
+    hide(bookARoomBar)
+    hide(yourBookingsButton)
     // renderBookingLinesOnPage()
     // hide(bookARoomBar)
     // hide(yourBookingsButton)
@@ -84,6 +88,7 @@ function welcomeCustomer() {
 
 
 function showAvailableBookingsFromCalendar() {
+    bookingMessage.innerText = `AVAILABLE ROOMS`
     bookARoomSection.innerHTML = ''
     let formattedDate = calendarValue.value.split('-').join('/')
     let theAvailableRooms = hotel.selectDateToBook(formattedDate)
@@ -103,16 +108,22 @@ function showAvailableBookingsFromCalendar() {
     // checkIfRoomsAreAvailableCop()
     // bookRoomButton = document.querySelector('.book-room')
     // bookRoomButton.addEventListener('click', postApiHelper)
+    show(bookingMessage)
 }
 
 function showRoomTypesFromFilter(event) {
     console.log('hello')
     event.preventDefault()
+    bookingMessage.innerText = `FILTERED RESULTS`
     bookARoomSection.innerHTML = ''
     let formattedDate = calendarValue.value.split('-').join('/')
-    let dropDownValue = roomType.value
-    console.log(dropDownValue)
+    let dropDownValue = selectDropDown.value
+    console.log('dropDownValue: ', dropDownValue)
     let theFilteredRoomTypes = hotel.filterRoomTypes(formattedDate, dropDownValue)
+    console.log('thefrt:', theFilteredRoomTypes)
+    if (!theFilteredRoomTypes.length) {
+        bookARoomSection.innerHTML = `<div> NO ROOMS AVAILABLE, PLEASE SEARCH AGAIN </div>`
+    } else {
     theFilteredRoomTypes.forEach((room) => {
         bookARoomSection.innerHTML += 
     `<div class="booking-card">
@@ -125,6 +136,7 @@ function showRoomTypesFromFilter(event) {
     <button class="book-room"> BOOK ROOM </button>
     </div>`
     })
+}
     // checkIfRoomsAreAvailableCop()
     // bookRoomButton = document.querySelector('.book-room')
     // bookRoomButton.addEventListener('click', postApiHelper)
@@ -133,13 +145,27 @@ function showRoomTypesFromFilter(event) {
 
 function showBookingPage() {
     console.log('hi from showbookingpage')
-    hide(bookingMessage)
+    show(bookARoomBar)
     show(bookARoomSection)
+    show(yourBookingsButton)
+    hide(bookARoomButton)
+    hide(bookingsSpot)
+    hide(bookingMessage)
 }
 
 
 function showYourBookingPage() {
     console.log('hello from showYourBookingPage')
+    // hide(yourBookingsButton)
+    // hide(bookARoomSection)
+    // show(bookARoomButton)
+    hide(bookARoomSection)
+    hide(bookARoomBar)
+    hide(yourBookingsButton)
+    show(bookARoomButton)
+    show(bookingsSpot)
+    show(bookingMessage)
+    bookingMessage.innerText = `YOUR BOOKINGS`
 }
 
 
@@ -155,6 +181,26 @@ function renderBookingLinesOnPage() {
     </div>`
     })
 }
+
+
+/*
+function logIn() {
+new view for hiding everything(page wrapper)
+have login page from user name and password (inputs)
+
+username - check id
+potential: split
+
+password - 
+
+conditional if username and password are correct show page, hide login page
+if wrong innerText = wrong password/username
+
+
+
+
+}
+*/
 
 
 // function postApiHelper(event) {

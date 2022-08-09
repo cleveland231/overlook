@@ -15,10 +15,14 @@ export default class Hotel {
         return restOfRooms
     }
     filterRoomTypes(date, type) {
+        // debugger
         const datePassedThrough = this.selectDateToBook(date)
+        // console.log('datepassed', datePassedThrough)
         const filteredByRoomTypes = datePassedThrough.filter((room) => {
-            room.roomType === type
+            return room.roomType === type
+            // console.log('room', room)
         })
+        // console.log('fbrt', filteredByRoomTypes)
         return filteredByRoomTypes
     }
 }

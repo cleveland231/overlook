@@ -11,7 +11,6 @@
   <div class="top">
     <h1> OVERLOOK MOTEL </h1> 
     <h1 class="welcome-customer"></h1>
-    <p class="amount-spent"></p>
     <button class="sign-out"> SIGN OUT </button>
   </div>
 
@@ -37,7 +36,7 @@
       <button class="your-bookings-button"> YOUR BOOKINGS </button>
     </div>
     <div class="dash-board">
-      <div class="book-a-room-bar hidden">
+      <div class="book-a-room-bar">
 
           <div class="calendar">
             <label for="start"> SELECT DATE: </label>
@@ -49,7 +48,7 @@
 
           <form class="filter-drop-down" action="#">
             <label for="filter"> FILTER BOOKINGS: </label>
-            <select name="filter" id="filtering">
+            <select class='selectDropDown' name="filter" id="filtering">
               <option class="room-type" value="single room"> SINGLE </option>
               <option class="room-type" value="junior suite"> JUNIOR </option>
               <option class="room-type" value="suite"> SUITE </option>
@@ -61,8 +60,8 @@
       </div>
 
       <div class="booking-message"> YOUR BOOKINGS </div>
+      <div class="bookings-spot"></div>
       <div class="book-a-room-section">
-        <div class="bookings-spot"></div>
         <!-- <div class="booking-card">
           <li> NUMBER </li>
           <li> TYPE </li>
