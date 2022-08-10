@@ -3,16 +3,11 @@ import Customer from '../src/classes/Customer'
 import Booking from '../src/classes/Booking'
 import Room from '../src/classes/Room'
 import Hotel from '../src/classes/Hotel'
-
 import { fetchAll } from './api-calls';
 
-const getRandomCustomer = () => {
-    return Math.floor(Math.random() * theCustomers.length);
-};
 
 // QUERY SELECTORS
 const bookARoomButton = document.querySelector('.book-a-room-button')
-const signOutButton = document.querySelector('.sign-out')
 let bookRoomButtons = document.querySelector('.book-room')
 const submitFilterButton = document.querySelector('.submit-filter-button')
 const calendarSubmitButton = document.querySelector('.submit-calendar-button')
@@ -34,6 +29,8 @@ const userName = document.querySelector('#userName')
 const passWord = document.querySelector('#passWord')
 const innerPage = document.querySelector('.innerPage')
 const outerPage = document.querySelector('.outerPage')
+const outerBanner = document.querySelector('.outer-banner')
+
 
 // GLOBAL VARIABLES
 let allBookings = [];
@@ -69,19 +66,18 @@ const getFetch = (id) => {
 
 
 // EVENT LISTENERS
-// signOutButton.addEventListener('click', )
 bookARoomButton.addEventListener('click', showBookingPage)
 calendarSubmitButton.addEventListener('click', showAvailableBookingsFromCalendar)
 yourBookingsButton.addEventListener('click', showYourBookingPage)
 submitFilterButton.addEventListener('click', showRoomTypesFromFilter)
-loginButton.addEventListener('click', function() {
+loginButton.addEventListener('click', function(event) {
     logIn(event)
 })
-
 window.addEventListener('load', function() {
     // getFetch()
     hide(bookARoomBar)
     hide(yourBookingsButton)
+    hide(innerPage)
 })
 
 
@@ -91,55 +87,16 @@ function logIn(event) {
     event.preventDefault()
     const currentUserName = userName.value
     const currentPassWord = passWord.value
-    console.log(currentUserName)
-
-
-
-
-//     if (currentPassWord === 'overlook2021') {
-// console.log('hello')
-//     }
-// console.log('split:', currentUserName.split('customer'))
-
-
     if (currentUserName.startsWith('customer') && currentPassWord === 'overlook2021') {
         const customerId = currentUserName.split('customer')[1]
         getFetch(customerId)
+        hide(outerPage)
+        show(innerPage)
     } else {
-        bookingMessage.innerText = 'INVALID NAME OR PASSWORD'
+        outerBanner.innerText = 'INVALID NAME OR PASSWORD, TRY AGAIN'
+        }
     }
-
-    }
     
-
-    
-    /*
-    hide()
-
-    function logIn() {
-    new view for hiding everything(page wrapper)
-    have login page from user name and password (inputs)
-    
-    username - customer50
-    get id from end of input
-    
-    potential: split
-    
-    password - 
-    make sure password === overlook2021
-    
-    conditional if username and password are correct 
-    before show page, fetch the userid
-    hide login page
-    if wrong innerText = wrong password/username
-    
-    // modifiy getFetch to take in parameter for id
-    // http://localhost:3001/api/v1/customers/<id> where<id> will be a number of a customer’s id
-    fetchApiData('http://localhost:3001/api/v1/customers/${customerId}'
-    }
-    */
-
-
 
 function welcomeCustomer() {
     currentCustomer.returnTotalSpent(allRooms)
@@ -177,9 +134,10 @@ function showAvailableBookingsFromCalendar() {
     show(bookingMessage)
 }
 
+
 function showRoomTypesFromFilter(event) {
     event.preventDefault()
-    bookingMessage.innerText = `FILTERED BY TYPE`
+    bookingMessage.innerText = `FILTERED BY ROOM TYPE`
     bookARoomSection.innerHTML = ''
     let formattedDate = calendarValue.value.split('-').join('/')
     let dropDownValue = selectDropDown.value
@@ -266,14 +224,13 @@ function renderBookingLinesOnPage() {
     <h2> ROOM: ${currentRoom.number} - ROOMTYPE: ${currentRoom.roomType} - BIDET: ${currentRoom.bidet} - BEDSIZE: ${currentRoom.bedSize} - COST: ${currentRoom.costPerNight}</h2>
     </div>`
     })
-}
-
-
+};
 
 
 function show(element) {
     element.classList.remove('hidden')
 };
+
 
 function hide(element) {
     element.classList.add('hidden')
@@ -283,89 +240,6 @@ function hide(element) {
 
 
 
-// function showRoomTypesFromFilter(event) {
-//     console.log('hello')
-//     event.preventDefault()
-//     bookingMessage.innerText = `FILTERED BY TYPE`
-//     bookARoomSection.innerHTML = ''
-//     let formattedDate = calendarValue.value.split('-').join('/')
-//     let dropDownValue = selectDropDown.value
-//     console.log('dropDownValue: ', dropDownValue)
-//     let theFilteredRoomTypes = hotel.filterRoomTypes(formattedDate, dropDownValue)
-//     console.log('thefrt:', theFilteredRoomTypes)
-//     if (!theFilteredRoomTypes.length) {
-//         bookARoomSection.innerHTML = `<div> NO ROOMS AVAILABLE, PLEASE SEARCH AGAIN </div>`
-//     } else {
-//     theFilteredRoomTypes.forEach((room) => {
-//         bookARoomSection.innerHTML += 
-//     `<div class="booking-card">
-//     <li> ROOM NUMBER: ${room.number} </li>
-//     <li> TYPE: ${room.roomType} </li>
-//     <li> BIDET: ${room.bidet} </li>
-//     <li> BED SIZE: ${room.bedSize} </li>
-//     <li> NUMBER OF BEDS: ${room.numBeds} </li>
-//     <li> COST: ${room.costPerNight} </li>
-//     <button class="book-room"> BOOK ROOM </button>
-//     </div>`
-//     })
-//     }
-//     // bookRoomButton = document.querySelector('.book-room')
-//     // bookRoomButton.addEventListener('click', postApiHelper)
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const setCustomerData = (customerData) => {
-//     console.log('cd', customerData)
-//     return new Customer(customerData)
-// };
-
-// const setRoomData = (roomData) => {
-//     return new Room(roomData)
-// };
-
-// const setBookingData = (bookingData) => {
-//     return new Booking(bookingData)
-// };
-
-
-
-
-// function renderBookingCardsOnPage() {
-//     bookARoomSection.innerHTML = ''
-//     currentCustomer.bookings.forEach((booking) => {
-//         currentRoom = allRooms.find((room) => {
-//            return booking.roomNumber === room.number
-//         })
-//     bookARoomSection.innerHTML += 
-//     `<div class="booking-card">
-//     <li> ROOM NUMBER: ${currentRoom.number} </li>
-//     <li> TYPE: ${currentRoom.roomType} </li>
-//     <li> BIDET: ${currentRoom.bidet} </li>
-//     <li> BED SIZE: ${currentRoom.bedSize} </li>
-//     <li> NUMBER OF BEDS: ${currentRoom.numBeds} </li>
-//     <li> COST: ${currentRoom.costPerNight} </li>
-//     <button class="book-room"> BOOK ROOM </button>
-//     </div>`
-//     })
-//     hide(bookingsSpot)
-//     show(bookARoomSection)
-// }
 
 
 
@@ -385,28 +259,22 @@ function hide(element) {
 
 
 
-// function callCustomers() {
-//     return fetch('http://localhost:3001/api/v1/customers')
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error(response.status + " " + response.statusText)
-//         } else {
-//             return response.json()
-//         }
-//     })
-//     .then((data) => {
-//         console.log(data)
-//         customers = data
-//     })
-//     .catch((error) => {
-//         console.log(error)
-//     })
-// }
 
-// callCustomers().then((data) => {
-//     console.log(data)
-//     customers = data
-// })
-// .catch((error) => {
-//     console.log(error)
-// })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

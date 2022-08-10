@@ -9,94 +9,81 @@
 </head>
 <body>
   <div class="outer-page">
+
+    <h1> OVERLOOK MOTEL </h1>
+
+    <div class="login-page">
+      <form class="login-page-form">
+        <div>
+          <label for="userName">USERNAME: </label>
+          <input id="userName" type="text" required/>
+        </div>
+        <div>
+          <label for="passWord">PASSWORD: </label>
+          <input id="passWord" type="password" required/>
+        </div>
+        <div>
+          <input class="login-button" type="submit" value="SUBMIT">
+        </div>
+      </form>
+    </div>  
+
+    <h1 class="outer-banner">  </h1>
+
   </div>
   <div class="inner-page">
-  <div class="top">
-    <h1> OVERLOOK MOTEL </h1> 
-    <h1 class="welcome-customer"></h1>
+    <div class="top">
+      <h1> OVERLOOK MOTEL </h1> 
+      <h1 class="welcome-customer"></h1>
 
-    <!-- <div class="login-page">
-        <form action="" method="get" class="form-example">
-          <div class="form-example">
-            <label for="name">USERNAME: </label>
-            <input type="text" name="name" id="name" required>
-          </div>
-          <div class="form-example">
-            <label for="email">PASSWORD: </label>
-            <input type="email" name="email" id="email" required>
-          </div>
-          <div id="login-button" class="form-example">
-            <input type="submit" value="SUBMIT">
-          </div>
-        </form>
-    </div> -->
-
-    <button class="sign-out"> SIGN OUT </button>
-
-  </div>
-
-  <div class="page-wrapper">
-    <div class="left-side">
-      <button class="book-a-room-button"> BOOK A ROOM </button>
-      <button class="your-bookings-button"> YOUR BOOKINGS </button>
     </div>
 
-    <div class="dash-board">
-      <div class="book-a-room-bar">
-
-          <div class="calendar">
-            <label for="start"> STEP 1. SELECT DATE: </label>
-            <input class='calendar-value' type="date" id="start" name="trip-start"
-                  value="2022-01-24"
-                  min="2022-08-19" max="2024-01-01">
-                  <input class="submit-calendar-button" type="submit" value="Submit" />
-          </div>
-
-          <form class="filter-drop-down" action="#">
-            <label for="filter"> STEP 2. FILTER BOOKINGS: </label>
-            <select class='selectDropDown' name="filter" id="filtering">
-              <option class="room-type" value="single room"> SINGLE </option>
-              <option class="room-type" value="junior suite"> JUNIOR </option>
-              <option class="room-type" value="suite"> SUITE </option>
-              <option class="room-type" value="residential suite"> RESIDENTIAL </option>
-              <input class="submit-filter-button" type="submit" value="Submit" />
-            </select>
-          </form>
-        
+    <div class="page-wrapper">
+      <div class="left-side">
+        <button class="book-a-room-button"> BOOK A ROOM </button>
+        <button class="your-bookings-button"> YOUR BOOKINGS </button>
       </div>
 
-      <h1 class="booking-message"> YOUR BOOKINGS </h1>
+      <div class="dash-board">
+        <div class="book-a-room-bar">
 
-      <div class="login-page">
-        <form>
-          <div>
-            <label for="userName">USERNAME: </label>
-            <input id="userName" type="text">
-          </div>
-          <div>
-            <label for="passWord">PASSWORD: </label>
-            <input id="passWord" type="password">
-          </div>
-          <div>
-            <input class="login-button" type="submit" value="SUBMIT">
-          </div>
-        </form>
-      </div>  
+            <div class="calendar">
+              <label for="start"> STEP 1. SELECT DATE: </label>
+              <input class='calendar-value' type="date" id="start" name="trip-start"
+                    value="2022-01-24"
+                    min="2022-08-19" max="2024-01-01">
+                    <input class="submit-calendar-button" type="submit" value="Submit" />
+            </div>
 
-      <div class="bookings-spot"></div>
-      <div class="book-a-room-section">
-        <!-- <div class="booking-card">
-          <li> NUMBER </li>
-          <li> TYPE </li>
-          <li> BIDET </li>
-          <li> BED SIZE </li>
-          <li> NUMBER OF BEDS </li>
-          <li> COST </li>
-          <button class="book-room"> BOOK ROOM </button>
-        </div> -->
+            <form class="filter-drop-down" action="#">
+              <label for="filter"> STEP 2. FILTER BOOKINGS: </label>
+              <select class='selectDropDown' name="filter" id="filtering">
+                <option class="room-type" value="single room"> SINGLE </option>
+                <option class="room-type" value="junior suite"> JUNIOR </option>
+                <option class="room-type" value="suite"> SUITE </option>
+                <option class="room-type" value="residential suite"> RESIDENTIAL </option>
+                <input class="submit-filter-button" type="submit" value="Submit" />
+              </select>
+            </form>
+          
+        </div>
+
+        <h1 class="booking-message"> YOUR BOOKINGS </h1>
+
+        <div class="bookings-spot"></div>
+        <div class="book-a-room-section">
+          <!-- <div class="booking-card">
+            <li> NUMBER </li>
+            <li> TYPE </li>
+            <li> BIDET </li>
+            <li> BED SIZE </li>
+            <li> NUMBER OF BEDS </li>
+            <li> COST </li>
+            <button class="book-room"> BOOK ROOM </button>
+          </div> -->
+        </div>
       </div>
     </div>
-  </div>
   </div>
   <script src="bundle.js"></script>
 </body>
