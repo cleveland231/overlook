@@ -8,33 +8,39 @@
   <title>Webpack Starter Kit</title>
 </head>
 <body>
+  <div class="outer-page">
+  </div>
+  <div class="inner-page">
   <div class="top">
     <h1> OVERLOOK MOTEL </h1> 
     <h1 class="welcome-customer"></h1>
-    <button class="sign-out"> SIGN OUT </button>
-  </div>
 
-  <!-- <div class="login-page hidden">
-    <form action="" method="get" class="form-example">
-      <div class="form-example">
-        <label for="name">USERNAME: </label>
-        <input type="text" name="name" id="name" required>
-      </div>
-      <div class="form-example">
-        <label for="email">PASSWORD: </label>
-        <input type="email" name="email" id="email" required>
-      </div>
-      <div class="form-example">
-        <input type="submit" value="SUBMIT">
-      </div>
-    </form>
-  </div> -->
+    <!-- <div class="login-page">
+        <form action="" method="get" class="form-example">
+          <div class="form-example">
+            <label for="name">USERNAME: </label>
+            <input type="text" name="name" id="name" required>
+          </div>
+          <div class="form-example">
+            <label for="email">PASSWORD: </label>
+            <input type="email" name="email" id="email" required>
+          </div>
+          <div id="login-button" class="form-example">
+            <input type="submit" value="SUBMIT">
+          </div>
+        </form>
+    </div> -->
+
+    <button class="sign-out"> SIGN OUT </button>
+
+  </div>
 
   <div class="page-wrapper">
     <div class="left-side">
       <button class="book-a-room-button"> BOOK A ROOM </button>
       <button class="your-bookings-button"> YOUR BOOKINGS </button>
     </div>
+
     <div class="dash-board">
       <div class="book-a-room-bar">
 
@@ -42,7 +48,7 @@
             <label for="start"> STEP 1. SELECT DATE: </label>
             <input class='calendar-value' type="date" id="start" name="trip-start"
                   value="2022-01-24"
-                  min="2021-01-01" max="2024-01-01">
+                  min="2022-08-19" max="2024-01-01">
                   <input class="submit-calendar-button" type="submit" value="Submit" />
           </div>
 
@@ -60,6 +66,23 @@
       </div>
 
       <h1 class="booking-message"> YOUR BOOKINGS </h1>
+
+      <div class="login-page">
+        <form>
+          <div>
+            <label for="userName">USERNAME: </label>
+            <input id="userName" type="text">
+          </div>
+          <div>
+            <label for="passWord">PASSWORD: </label>
+            <input id="passWord" type="password">
+          </div>
+          <div>
+            <input class="login-button" type="submit" value="SUBMIT">
+          </div>
+        </form>
+      </div>  
+
       <div class="bookings-spot"></div>
       <div class="book-a-room-section">
         <!-- <div class="booking-card">
@@ -74,7 +97,7 @@
       </div>
     </div>
   </div>
-  
+  </div>
   <script src="bundle.js"></script>
 </body>
 </html>

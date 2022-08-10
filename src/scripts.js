@@ -28,7 +28,12 @@ const bookingARoomSection = document.querySelector('#booking-a-room-section')
 const roomType = document.querySelector('.room-type')
 const bookARoomBar = document.querySelector('.book-a-room-bar')
 const selectDropDown = document.querySelector('.selectDropDown')
-
+const loginButton = document.querySelector('.login-button')
+const loginPage = document.querySelector('.login-page')
+const userName = document.querySelector('#userName')
+const passWord = document.querySelector('#passWord')
+const innerPage = document.querySelector('.innerPage')
+const outerPage = document.querySelector('.outerPage')
 
 // GLOBAL VARIABLES
 let allBookings = [];
@@ -40,14 +45,14 @@ let theBookings;
 let theRooms;
 let hotel;
 let justBookedRoom;
-const getFetch = () => {
-    fetchAll()
+const getFetch = (id) => {
+    fetchAll(id)
     .then(data => {
         console.log(data)
-        theCustomers = data[0].customers
+        theCustomers = data[0]
         theBookings = data[1].bookings
         theRooms = data[2].rooms
-        currentCustomer = new Customer(theCustomers[0], theBookings)
+        currentCustomer = new Customer(theCustomers, theBookings)
         currentCustomer.viewPastAndUpcomingBookings()     
         theBookings.forEach((booking) => {
             allBookings.push(new Booking(booking))
@@ -69,15 +74,73 @@ bookARoomButton.addEventListener('click', showBookingPage)
 calendarSubmitButton.addEventListener('click', showAvailableBookingsFromCalendar)
 yourBookingsButton.addEventListener('click', showYourBookingPage)
 submitFilterButton.addEventListener('click', showRoomTypesFromFilter)
+loginButton.addEventListener('click', function() {
+    logIn(event)
+})
 
 window.addEventListener('load', function() {
-    getFetch()
+    // getFetch()
     hide(bookARoomBar)
     hide(yourBookingsButton)
 })
 
 
 // FUNCTIONS
+
+function logIn(event) {
+    event.preventDefault()
+    const currentUserName = userName.value
+    const currentPassWord = passWord.value
+    console.log(currentUserName)
+
+
+
+
+//     if (currentPassWord === 'overlook2021') {
+// console.log('hello')
+//     }
+// console.log('split:', currentUserName.split('customer'))
+
+
+    if (currentUserName.startsWith('customer') && currentPassWord === 'overlook2021') {
+        const customerId = currentUserName.split('customer')[1]
+        getFetch(customerId)
+    } else {
+        bookingMessage.innerText = 'INVALID NAME OR PASSWORD'
+    }
+
+    }
+    
+
+    
+    /*
+    hide()
+
+    function logIn() {
+    new view for hiding everything(page wrapper)
+    have login page from user name and password (inputs)
+    
+    username - customer50
+    get id from end of input
+    
+    potential: split
+    
+    password - 
+    make sure password === overlook2021
+    
+    conditional if username and password are correct 
+    before show page, fetch the userid
+    hide login page
+    if wrong innerText = wrong password/username
+    
+    // modifiy getFetch to take in parameter for id
+    // http://localhost:3001/api/v1/customers/<id> where<id> will be a number of a customer’s id
+    fetchApiData('http://localhost:3001/api/v1/customers/${customerId}'
+    }
+    */
+
+
+
 function welcomeCustomer() {
     currentCustomer.returnTotalSpent(allRooms)
     welcomeCustomerSpot.innerHTML = `Howdy ${currentCustomer.name}! You have spent: ${currentCustomer.totalSpent.toFixed(2)}`
@@ -165,8 +228,6 @@ function postApiData(justBookedRoom) {
         hide(bookARoomSection)
         welcomeCustomer()
         renderBookingLinesOnPage()
-
-
     })
     .catch(error => console.log(error));
 }
@@ -179,6 +240,7 @@ function showBookingPage() {
     hide(bookARoomButton)
     hide(bookingsSpot)
     hide(bookingMessage)
+    bookARoomSection.innerHTML = ''
 }
 
 
@@ -208,34 +270,6 @@ function renderBookingLinesOnPage() {
 
 
 
-
-
-
-
-
-/*
-function logIn() {
-new view for hiding everything(page wrapper)
-have login page from user name and password (inputs)
-
-username - 
-get id from end of input
-
-potential: split
-
-password - 
-make sure password === overlook2021
-
-conditional if username and password are correct 
-before show page, fetch the userid
-hide login page
-if wrong innerText = wrong password/username
-
-// modifiy getFetch to take in parameter for id
-// http://localhost:3001/api/v1/customers/<id> where<id> will be a number of a customer’s id
-
-}
-*/
 
 function show(element) {
     element.classList.remove('hidden')
