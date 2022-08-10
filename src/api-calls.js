@@ -10,9 +10,9 @@ function fetchApiData(url) {
 }
 
 
-const fetchAll = (id) => {
+const fetchAll = () => {
 return Promise.all([
-    fetchApiData(`http://localhost:3001/api/v1/customers/${id}`), 
+    fetchApiData(`http://localhost:3001/api/v1/customers`), 
     fetchApiData('http://localhost:3001/api/v1/bookings'), 
     fetchApiData('http://localhost:3001/api/v1/rooms'),
     ])
