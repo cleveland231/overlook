@@ -5,8 +5,6 @@
   - [Introduction](#introduction)
   - [Technologies](#technologies)
   - [Features](#features)
-  - [Illustrations](#illustrations)
-  - [Deployed Page](#deployed-page)
   - [Possible Future Extensions](#possible-future-extensions)
   - [Set Up](#set-up)
   - [Organizational Resources](#organizational-resources)
@@ -16,7 +14,7 @@
 
 ## Introduction
 
-  -
+  - Visit Overlook.com to book a stay at the world renowned motel
 
 ## Technologies
   - Javascript
@@ -25,19 +23,13 @@
 
 ## Features
 
-   - 
-
-## Illustrations
-
-![]()
-
-## Deployed Page
-
-Visit our published IdeaBox page [here]()
+   - Filter through dates 
+   - Filter through room types
 
 ## Possible Future Extensions
 
-  - 
+  - Book multiple days
+  - View a past and upcoming stay
 
 ## Set Up
 
@@ -47,7 +39,8 @@ Visit our published IdeaBox page [here]()
 
 ## Organizational Resources
 
-- []()
+- [figjam](https://www.figma.com/file/UGbDcaDABeQiK6D8vsSs2i/Untitled?node-id=2%3A177)
+- [figma](https://www.figma.com/file/MoXOsYleJVKozFQraaXMNS/Untitled?node-id=0%3A1)
 
 ## Sources
 

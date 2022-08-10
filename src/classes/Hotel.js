@@ -1,4 +1,3 @@
-
 export default class Hotel {
     constructor(customer, bookings, rooms) {
         this.customer = customer;
@@ -17,7 +16,7 @@ export default class Hotel {
     filterRoomTypes(date, type) {
         const datePassedThrough = this.selectDateToBook(date)
         const filteredByRoomTypes = datePassedThrough.filter((room) => {
-            room.roomType === type
+            return room.roomType === type
         })
         return filteredByRoomTypes
     }
