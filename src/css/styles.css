@@ -1,6 +1,5 @@
 * {
   /* border: greenyellow solid 1px; */
-  /* margin: 3px; */
 }
 
 body {
@@ -51,7 +50,6 @@ h1 {
 	align-items: flex-start;
 	align-content: center;
 }
-
 
 button {
   height: 40px;
@@ -113,8 +111,8 @@ button {
 }
 
 .outer-page {
-  height: vh;
-  width: vw;
+  height: 900px;
+  width: 100vw;
   display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -137,4 +135,3 @@ button {
 .hidden {
   display: none !important;
 }
-

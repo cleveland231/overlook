@@ -1,4 +1,3 @@
-
 export default class Customer {
     constructor(customerData, bookings) {
         this.id = customerData.id;

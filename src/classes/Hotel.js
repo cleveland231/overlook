@@ -1,4 +1,3 @@
-
 export default class Hotel {
     constructor(customer, bookings, rooms) {
         this.customer = customer;
@@ -15,14 +14,10 @@ export default class Hotel {
         return restOfRooms
     }
     filterRoomTypes(date, type) {
-        // debugger
         const datePassedThrough = this.selectDateToBook(date)
-        // console.log('datepassed', datePassedThrough)
         const filteredByRoomTypes = datePassedThrough.filter((room) => {
             return room.roomType === type
-            // console.log('room', room)
         })
-        // console.log('fbrt', filteredByRoomTypes)
         return filteredByRoomTypes
     }
 }

@@ -27,8 +27,8 @@ const loginButton = document.querySelector('.login-button')
 const loginPage = document.querySelector('.login-page')
 const userName = document.querySelector('#userName')
 const passWord = document.querySelector('#passWord')
-const innerPage = document.querySelector('.innerPage')
-const outerPage = document.querySelector('.outerPage')
+const innerPage = document.querySelector('.inner-page')
+const outerPage = document.querySelector('.outer-page')
 const outerBanner = document.querySelector('.outer-banner')
 
 
@@ -74,7 +74,6 @@ loginButton.addEventListener('click', function(event) {
     logIn(event)
 })
 window.addEventListener('load', function() {
-    // getFetch()
     hide(bookARoomBar)
     hide(yourBookingsButton)
     hide(innerPage)
@@ -82,7 +81,6 @@ window.addEventListener('load', function() {
 
 
 // FUNCTIONS
-
 function logIn(event) {
     event.preventDefault()
     const currentUserName = userName.value
@@ -100,7 +98,7 @@ function logIn(event) {
 
 function welcomeCustomer() {
     currentCustomer.returnTotalSpent(allRooms)
-    welcomeCustomerSpot.innerHTML = `Howdy ${currentCustomer.name}! You have spent: ${currentCustomer.totalSpent.toFixed(2)}`
+    welcomeCustomerSpot.innerHTML = `Howdy ${currentCustomer.name}! You have spent: $${currentCustomer.totalSpent.toFixed(2)}`
 };
 
 
@@ -153,7 +151,7 @@ function showRoomTypesFromFilter(event) {
     <li> BIDET: ${room.bidet} </li>
     <li> BED SIZE: ${room.bedSize} </li>
     <li> NUMBER OF BEDS: ${room.numBeds} </li>
-    <li> COST: ${room.costPerNight} </li>
+    <li> COST: $${room.costPerNight} </li>
     <button id=${index} class="book-room"> BOOK ROOM </button>
     </div>`
 })
@@ -221,7 +219,7 @@ function renderBookingLinesOnPage() {
         })
     bookingsSpot.innerHTML += 
     `<div class="bookings-spot"> 
-    <h2> ROOM: ${currentRoom.number} - ROOMTYPE: ${currentRoom.roomType} - BIDET: ${currentRoom.bidet} - BEDSIZE: ${currentRoom.bedSize} - COST: ${currentRoom.costPerNight}</h2>
+    <h2> ROOM: ${currentRoom.number} - ROOMTYPE: ${currentRoom.roomType} - BIDET: ${currentRoom.bidet} - BEDSIZE: ${currentRoom.bedSize} - COST: $${currentRoom.costPerNight}</h2>
     </div>`
     })
 };

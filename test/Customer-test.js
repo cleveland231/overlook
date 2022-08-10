@@ -7,15 +7,12 @@ import Customer from '../src/classes/Customer'
 import Booking from '../src/classes/Booking'
 import Room from '../src/classes/Room'
 
-// console.log("scd", sampleCustomerData[0])
-
 describe('Customer test',() => {
 
     let customer;
     let bookings = [];
     let rooms = [];
     
-
     beforeEach(() => {
         sampleBookingData.forEach((booking) => {
             bookings.push(new Booking(booking))
@@ -48,13 +45,19 @@ describe('Customer test',() => {
     });
 
     it('Should be able to view past and upcoming bookings', () => {
-        viewPastAndUpcomingBookings(booking)
-        expect(customer.viewPastAndUpcomingBookings(booking)).to.equal('61647.11')
+        expect(customer.viewPastAndUpcomingBookings()).to.equal()
+    })
+
+    it('Should be able to round the total amount of spent cents', () => {
+        customer.returnTotalSpent(sampleRoomData)
+        customer.totalSpent = customer.totalSpent
+        expect(customer.totalSpent).to.equal(61647.1099999999)
     })
 
     it('Should be able to return the total amount spent', () => {
         customer.returnTotalSpent(sampleRoomData)
         customer.totalSpent = customer.totalSpent.toFixed(2)
-        expect(customer.totalSpent).to.equal('52840.38')
+        expect(customer.totalSpent).to.equal('70453.84')
     })
+
 })
